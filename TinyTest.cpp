@@ -13,7 +13,7 @@ void TinyTest::scriptFunction(float in)
 
 void TinyTest::privateFunc()
 {
-    qDebug() << "Private funtion" << "\n";
+    qDebug() << "Private function" << "\n";
 }
 
 float TinyTest::getSpeed() const

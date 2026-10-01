@@ -23,17 +23,17 @@ int main(int argc, char *argv[])
 
     //Make the Script engine itself
     QJSEngine engine;
-    //    qDebug() << "The script engine is small: " << sizeof(engine) << "\n";
+    // qDebug() << "The script engine is small: " << sizeof(engine) << "\n";
 
 
     //0. Evaluate and run scripts directly (not from scriptfile): *************************
     //You put your script code inside engine.evaluate("script code here");
 
-    //    QJSValue scriptVariable = engine.evaluate("1 + 6");
-    //    qDebug() << scriptVariable.toNumber();
+       // QJSValue scriptVariable = engine.evaluate("1 + 6");
+       // qDebug() << scriptVariable.toNumber();
 
-    //    qDebug() << engine.evaluate("'the magic number is'").toString()
-    //             << engine.evaluate("3.8 + 4").toNumber();
+       // qDebug() << engine.evaluate("'the magic number is'").toString()
+       //          << engine.evaluate("3.8 + 4").toNumber();
 
     // NB !!!
     // JS variables are whatever. We need to convert to specific datatypes!
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     if (!scriptFile.open(QIODevice::ReadOnly))
         qDebug() << "Error - NO FILE HERE: " << fileName;
     else
-        qDebug() << "file opened: " << fileName;
+        qDebug() << "\n -- script file opened: " << fileName;
 
     //reads the file
     QTextStream stream(&scriptFile);
@@ -70,35 +70,35 @@ int main(int argc, char *argv[])
     //1. Call a function in the script file: *****************************************
     // 4 steps:
     //Make a C++ variable to the function
-    //    QJSValue func = engine.evaluate("addition");
+    // QJSValue func = engine.evaluate("addition");
     //and the arguments
-    //    QJSValueList args;
+    // QJSValueList args;
     //Read in arguments: 3 is the first (a) 8.9 is the last (b)
-    //    args << 3 << 8.9;
+    // args << 3 << 8.9;
     //Call the function and hold the return value
-    //    QJSValue result = func.call(args);
+    // QJSValue result = func.call(args);
     //Check the return value (toNumber() makes a double of it)
-    //    qDebug() << result.toNumber() << "\n";
+    // qDebug() << result.toNumber() << "\n";
 
 
     //2. Reads a variable value from the script file: *****************************************
-    //    QJSValue mString = engine.evaluate("myVariable");
-    //    qDebug() << mString.toString() << "\n";
+    // QJSValue mString = engine.evaluate("myVariable");
+    // qDebug() << mString.toString() << "\n";
 
     //3. Push a C++ object to JavaScript: *****************************************
     //Make Tiny object - Tiny is a cpp class we have made:
-    TinyTest *tinyObject = new TinyTest;
-    //    //Makes a script-version for the script engine:
-    QJSValue objectTest = engine.newQObject(tinyObject);
-    //    //Make a name for the object in the script engine
-    engine.globalObject().setProperty("cObject", objectTest);
+    // TinyTest *tinyObject = new TinyTest;
+    //Makes a script-version for the script engine:
+    // QJSValue objectTest = engine.newQObject(tinyObject);
+    //Make a name for the object in the script engine
+    // engine.globalObject().setProperty("cObject", objectTest);
 
     //4. Calls a function in script that calls the C-function: ***************************
     //Make a variable for the function
-    //    QJSValue directCCall = engine.evaluate("callCFunction");
+    // QJSValue directCCall = engine.evaluate("callCFunction");
     //Call the function
-    //    QJSValue speed = directCCall.call();
-    //    qDebug() << speed.toNumber();
+    // QJSValue speed = directCCall.call();
+    // qDebug() << speed.toNumber();
 
     //5. Calls a function in script that calls the C-function: ***************************
     //C functions have to be public and have Q_INVOKABLE in front of it

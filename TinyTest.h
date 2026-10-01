@@ -3,16 +3,16 @@
 
 #include <QObject>
 
-//Klassen må være av type QObject
+//The class needs to be of type QObject
 class TinyTest : public QObject
 {
-//  for å kalle funksjoner fra javascript
+    // to call functions from JavaScript
     Q_OBJECT
 
-//  For å bruke en C++ variabel i javascript må du bruke Q_PROPERTY
-//  Dette er navn og funksjonskall du kan bruke fra javascript
-//           variabel  navn     lesfunk       skrivfunc        signal ved forandring
-    Q_PROPERTY(float speed READ getSpeed WRITE setSpeed)    // NOTIFY valueChanged)
+    // To use a C++ variable in JavaScript you need to use Q_PROPERTY
+    // These are names and function calls you can use from JavaScript
+    //       variabel-name   read-function   write-function    signal when changed
+    Q_PROPERTY(float speed READ getSpeed WRITE setSpeed) // NOTIFY valueChanged)
                                                             //get warning without this but it works
 
 public:
@@ -20,11 +20,11 @@ public:
 
     void sendSignal();
 
-//  Q_INVOKABLE må brukes forran funksjoner som skal kalles fra javascript
+//  Q_INVOKABLE must be used in front of functions that will be called from JavaScript
     Q_INVOKABLE int commonFunc();
 
-    //Setter og getter for speed-variabelen
-    //navnene er de samme som i Q_PROPERTY over
+    //Setter and getter for speed-variable
+    //names are the same as in Q_PROPERTY above
     float getSpeed() const;
     void setSpeed(float value);
 
@@ -32,15 +32,15 @@ signals:
     void signalOne();
 
 public slots:
-//  en public slot kan kalles fra javascript, uten Q_INVOKABLE
+//  a public slot can be called from JavaScript, without Q_INVOKABLE
     void scriptFunction(float in);
 
 private:
-//  denne kan ikke kalles, fordi den er private
+//  this cannot be called, because it is private
     Q_INVOKABLE void privateFunc();
 
-//  denne har setters og getters som gjennom Q_PROPERTY kan brukes fra
-//  javascript - der den heter bare "speed" som angitt i Q_PROPERTY
+//  this has setters and getters that through Q_PROPERTY can be used from
+//  JavaScript - where it is named "speed" as given in Q_PROPERTY
     float mSpeed{4.234f};
 };
 

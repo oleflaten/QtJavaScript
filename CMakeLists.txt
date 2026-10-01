@@ -10,10 +10,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(QtJavaScript LANGUAGES CXX)
 
-add_executable(QtJavaScript
+set(SOURCES
     main.cpp
     TinyTest.h TinyTest.cpp
 )
+
+# show script files in editor
+file(GLOB SCRIPT_FILES
+    "*.js"
+)
+
+add_executable(QtJavaScript ${SOURCES} ${SCRIPT_FILES})
 
 target_link_libraries(QtJavaScript
     PRIVATE
